@@ -1,0 +1,18 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: joplin-ingressroute                  # name of ingressroute
+  namespace: joplin-system                   # namespace to install ingressroute in
+spec:
+  entryPoints:
+    - web                             # access the ingressroute at web (http / port 80)
+    #    - websecure
+  routes:
+    - match: Host(`joplin.flems.local`)        # replace with your FQDN
+      kind: Rule
+      services:
+        - name: joplin                      # name of backend service
+          namespace: joplin-system          # namespace of backend service
+          passHostHeader: true
+          port: 80

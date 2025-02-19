@@ -1,0 +1,50 @@
+---
+postgresql:
+  enabled: true
+  auth:
+    postgresPassword: "<postgressPsswd>"
+    database: joplin
+    username: johndoe
+    password: <passwd>
+  persistence:
+    enabled: true
+    existingClaim: ""
+    storageClass: ""
+    # size: 8Gi
+
+common:
+  # container
+  image:
+    repositorySettings:
+      isPrivate: false
+      secretName: null
+    repository: redrathnure/joplin
+    tag: 3.3.1-beta
+    pullPolicy: Always
+
+  # env variables
+  variables:
+    secret: {}
+    nonSecret:
+      DB_CLIENT: pg
+      POSTGRES_DATABASE: "joplin"
+      POSTGRES_USER: "johndoe"
+      POSTGRES_PASSWORD: "<passwd>"
+      POSTGRES_HOST: "joplin-postgresql"  # if postgresql.enabled, must be RELEASE-NAME-postgresql (ex: my-wakapi-postgresql)
+      POSTGRES_PORT: "5432"
+      APP_BASE_URL: https://joplin.domaine.tld
+
+  # ingress
+  ingress:
+    enabled: false
+    hostName: joplin.domaine.tld
+    tls:
+      enabled: false
+      secretName: ""
+    # For Ingress CRD
+    ingressClassName: ""
+    # For IngressRoute CRD
+    isIngressRoute: false
+    entrypoint: websecure
+    certResolver: letsencrypt  # leave empty if you don't use, tls.enabled must be true and secretName must me empty
+
