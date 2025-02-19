@@ -20,6 +20,9 @@ helm install joplin rubxkube/joplin \
     --namespace joplin-system \
     --create-namespace \
     --values joplin-values.yaml
+
+# Add an ingressroute for Traefik
+kubectl apply -f joplin-ingressroute.yaml
 ```
 
 ## 🔧 Configuration
