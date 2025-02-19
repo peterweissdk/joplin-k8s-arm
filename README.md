@@ -1,4 +1,12 @@
-# 💾 This Helm chart deploys Joplin Server on Kubernetes ARM-based clusters. This chart is based on the work from [Rub'x Kube](https://github.com/rubxkube/helm-charts/tree/main/charts/joplin), modified for ARM architecture. This implementation uses [redrathnure's ARM-compatible Joplin container](https://hub.docker.com/r/redrathnure/joplin) as its base image.
+# 💾 Joplin Server Helm Chart for ARM Architecture
+
+## 🙏 Attribution
+
+This chart is based on the work from [Rub'x Kube](https://github.com/rubxkube/helm-charts/tree/main/charts/joplin), modified for ARM architecture. This implementation uses [redrathnure's ARM-compatible Joplin container](https://hub.docker.com/r/redrathnure/joplin) as its base image.
+
+## ℹ️ Info
+
+The Traefik IngressRoute is configured for HTTP only, as SSL termination and certificate management are handled externally through pfSense in front of my LAN.
 
 ## ✨ Features
 
@@ -13,6 +21,7 @@
 To install the Joplin server, run:
 
 ```bash
+# Install Joplin Helm Chart
 helm repo add rubxkube https://rubxkube.github.io/charts/
 helm repo update
 
@@ -21,7 +30,7 @@ helm install joplin rubxkube/joplin \
     --create-namespace \
     --values joplin-values.yaml
 
-# Add an ingressroute for Traefik
+# Ingressroute for Traefik
 kubectl apply -f joplin-ingressroute.yaml
 ```
 
