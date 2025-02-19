@@ -6,13 +6,13 @@ metadata:
   namespace: joplin-system                   # namespace to install ingressroute in
 spec:
   entryPoints:
-    - web                             # access the ingressroute at web (http / port 80)
-    #    - websecure
+    - web                                    # access the ingressroute at web (http / port 80)
+#   - websecure
   routes:
-    - match: Host(`joplin.flems.local`)        # replace with your FQDN
+    - match: Host(`joplin.domaine.tld`)      # replace with your FQDN
       kind: Rule
       services:
-        - name: joplin                      # name of backend service
-          namespace: joplin-system          # namespace of backend service
+        - name: joplin                       # name of backend service
+          namespace: joplin-system           # namespace of backend service
           passHostHeader: true
           port: 80
