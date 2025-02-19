@@ -5,7 +5,7 @@ postgresql:
     postgresPassword: "<postgressPsswd>"
     database: joplin
     username: johndoe
-    password: <passwd>
+    password: passwd
   persistence:
     enabled: true
     existingClaim: ""
@@ -29,7 +29,7 @@ common:
       DB_CLIENT: pg
       POSTGRES_DATABASE: "joplin"
       POSTGRES_USER: "johndoe"
-      POSTGRES_PASSWORD: "<passwd>"
+      POSTGRES_PASSWORD: "passwd"
       POSTGRES_HOST: "joplin-postgresql"  # if postgresql.enabled, must be RELEASE-NAME-postgresql (ex: my-wakapi-postgresql)
       POSTGRES_PORT: "5432"
       APP_BASE_URL: https://joplin.domaine.tld

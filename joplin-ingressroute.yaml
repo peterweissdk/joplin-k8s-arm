@@ -7,7 +7,7 @@ metadata:
 spec:
   entryPoints:
     - web                                    # access the ingressroute at web (http / port 80)
-#   - websecure
+#   - websecure                              # access the ingressroute at websecure (https / port 443)
   routes:
     - match: Host(`joplin.domaine.tld`)      # replace with your FQDN
       kind: Rule
