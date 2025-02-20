@@ -1,5 +1,7 @@
 # 💾 Joplin Server Helm Chart for ARM Architecture
 
+[![Static Badge](https://img.shields.io/badge/Helm-Chart-white?style=flat&logo=helm&logoColor=white&logoSize=auto&labelColor=black)](https://helm.sh/)
+
 ## 🙏 Attribution
 
 This chart is based on the work from [Rub'x Kube](https://github.com/rubxkube/helm-charts/tree/main/charts/joplin), modified for ARM architecture. This implementation uses [redrathnure's ARM-compatible Joplin container](https://hub.docker.com/r/redrathnure/joplin) as its base image.
