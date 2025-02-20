@@ -13,9 +13,9 @@ The Traefik IngressRoute is configured for HTTP only, as SSL termination and cer
 ## ✨ Features
 
 - Full Joplin Server deployment optimized for ARM architecture
-- Ingress support for easy access
+- Traefik ingressroute support for easy access
 - Persistent storage for your notes and attachments
-- Highly configurable through values.yaml
+- Configurable through joplin-values.yaml
 - ARM-compatible images and configurations
 
 ## 🚀 Quick Start
@@ -47,10 +47,10 @@ https://artifacthub.io/packages/helm/rubxkube/joplin
 
 ```
 joplin-k8s-arm/
-├── joplin-ingressroute.yaml    # Ingressroute configuration for Traefik proxy
-├── joplin-values.yaml          # Default configuration values
-├── LICENSE                     # License information
-└── README.md                   # This documentation
+├── joplin-ingressroute.yaml
+├── joplin-values.yaml
+├── LICENSE
+└── README.md
 ```
 
 ## 🔍 Health Check
@@ -58,8 +58,12 @@ joplin-k8s-arm/
 To check the deployment status:
 
 ```bash
+# Check pods
 kubectl get pods -n joplin-system
 kubectl describe pod -n joplin-system <pod-name>
+
+# Check Traefik ingressroute
+kubectl describe ingressroutes.traefik.io joplin-ingressroute -n joplin-system
 ```
 
 ## 🤝 Contributing
