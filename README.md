@@ -4,7 +4,7 @@
 
 ## 🙏 Attribution
 
-This chart is based on the work from [Rub'x Kube](https://artifacthub.io/packages/helm/rubxkube/joplin), modified for ARM architecture. This implementation uses [redrathnure's ARM-compatible Joplin container](https://hub.docker.com/r/redrathnure/joplin) as its base image.
+This values file is compatible with the chart from [Rub'x Kube](https://artifacthub.io/packages/helm/rubxkube/joplin), modified for ARM architecture. This implementation uses [redrathnure's ARM-compatible Joplin container](https://hub.docker.com/r/redrathnure/joplin) as it's base image.
 
 ## ℹ️ Info
 
