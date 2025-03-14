@@ -31,25 +31,31 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5432
+        envFrom:
+        - configMapRef:
+            name: joplin-config
         env:
-        - name: POSTGRES_DATABASE
-          valueFrom:
-            configMapKeyRef:
-              name: joplin-config
-              key: POSTGRES_DATABASE
-        - name: POSTGRES_USER
-          valueFrom:
-            configMapKeyRef:
-              name: joplin-config
-              key: POSTGRES_USER
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              name: joplin-config
-              key: POSTGRES_PASSWORD
+        - name: PGDATA
+          value: /var/lib/postgresql/data/postgres
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - $(POSTGRES_USER)
+          initialDelaySeconds: 5
+          periodSeconds: 10
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data
+          subPath: postgres
       volumes:
       - name: postgres-storage
         persistentVolumeClaim:
