@@ -48,10 +48,63 @@ https://artifacthub.io/packages/helm/rubxkube/joplin
 ```
 joplin-k8s-arm/
 ├── joplin-ingressroute.yaml
+├── joplin-manifest/
+│   ├── joplin.yaml
+│   └── postgres.yaml
 ├── joplin-values.yaml
 ├── LICENSE
 └── README.md
 ```
+
+## 📦 Manifests
+
+The `joplin-manifest` folder contains raw Kubernetes manifests as an alternative to the Helm deployment:
+
+### Using Raw Manifests
+
+To deploy Joplin using raw manifests instead of Helm:
+
+```bash
+# Create namespace
+kubectl create namespace joplin-system
+
+# Apply manifests
+kubectl apply -f joplin-manifest/postgres.yaml -n joplin-system
+kubectl apply -f joplin-manifest/joplin.yaml -n joplin-system
+kubectl apply -f joplin-ingressroute.yaml -n joplin-system
+```
+
+To remove the deployment:
+
+```bash
+# Remove all resources
+kubectl delete -f joplin-ingressroute.yaml -n joplin-system
+kubectl delete -f joplin-manifest/joplin.yaml -n joplin-system
+kubectl delete -f joplin-manifest/postgres.yaml -n joplin-system
+
+# Optionally remove the namespace
+kubectl delete namespace joplin-system
+```
+
+### Manifest Details
+
+- `joplin.yaml`: Contains the Joplin server deployment configuration
+  - ConfigMap with application settings
+  - Secret for database credentials
+  - Deployment with RollingUpdate strategy for zero-downtime updates
+  - Service exposing port 80
+  - Default credentials:
+    - Username: admin@localhost
+    - Password: admin
+    > ⚠️ For security, please change these credentials after first login
+
+- `postgres.yaml`: Contains the PostgreSQL database configuration
+  - PersistentVolumeClaim for data storage (5Gi)
+  - Deployment with Recreate strategy to ensure data integrity
+  - Service named 'db' exposing port 5432
+  - Uses official postgres:16 image
+
+Both deployments are configured with node selectors to run on nodes labeled with `node-role.kubernetes.io/agent=true`.
 
 ## 🔍 Health Check
 
