@@ -26,6 +26,8 @@ spec:
       labels:
         app: postgres
     spec:
+      nodeSelector:
+        node-role.kubernetes.io/agent: "true"
       containers:
       - name: postgres
         image: postgres:16

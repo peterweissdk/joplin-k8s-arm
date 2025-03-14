@@ -31,6 +31,8 @@ spec:
       labels:
         app: joplin
     spec:
+      nodeSelector:
+        node-role.kubernetes.io/agent: "true"
       containers:
       - name: joplin
         image: redrathnure/joplin
