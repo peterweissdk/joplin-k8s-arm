@@ -1,3 +1,17 @@
+# The default credentials for the Joplin note app are:
+#
+#     Username: admin@localhost
+#     Password: admin
+#
+apiVersion: v1
+kind: Secret
+metadata:
+  name: joplin-db-credentials
+type: Opaque
+stringData:
+  POSTGRES_USER: "joplin"
+  POSTGRES_PASSWORD: "ChangePassword"
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,8 +23,6 @@ data:
   POSTGRES_HOST: "db"
   POSTGRES_PORT: "5432"
   POSTGRES_DATABASE: "joplin"
-  POSTGRES_USER: "joplin"
-  POSTGRES_PASSWORD: "ChangePassword"
   SQLITE_DATABASE: "/data/db.sqlite"
 # PUID: "1000"
 # PGID: "1000"
@@ -46,6 +58,8 @@ spec:
         envFrom:
         - configMapRef:
             name: joplin-config
+        - secretRef:
+            name: joplin-db-credentials
 ---
 apiVersion: v1
 kind: Service
