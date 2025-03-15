@@ -69,18 +69,14 @@ To deploy Joplin using raw manifests instead of Helm:
 kubectl create namespace joplin-system
 
 # Apply manifests
-kubectl apply -f joplin-manifest/postgres.yaml -n joplin-system
-kubectl apply -f joplin-manifest/joplin.yaml -n joplin-system
-kubectl apply -f joplin-ingressroute.yaml -n joplin-system
+kubectl apply -f <YAML-file> -n joplin-system
 ```
 
 To remove the deployment:
 
 ```bash
 # Remove all resources
-kubectl delete -f joplin-ingressroute.yaml -n joplin-system
-kubectl delete -f joplin-manifest/joplin.yaml -n joplin-system
-kubectl delete -f joplin-manifest/postgres.yaml -n joplin-system
+kubectl delete -f <YAML-file> -n joplin-system
 
 # Optionally remove the namespace
 kubectl delete namespace joplin-system
@@ -93,6 +89,7 @@ kubectl delete namespace joplin-system
   - Secret for database credentials
   - Deployment with RollingUpdate strategy for zero-downtime updates
   - Service exposing port 80
+  - APP_BASE_URL: Set base URL for the Joplin server
   - Default credentials:
     - Username: admin@localhost
     - Password: admin
@@ -104,7 +101,7 @@ kubectl delete namespace joplin-system
   - Service named 'db' exposing port 5432
   - Uses official postgres:16 image
 
-Both deployments are configured with node selectors to run on nodes labeled with `node-role.kubernetes.io/agent=true`.
+Both deployments are configured with node selectors to run on nodes labeled with `node-role.kubernetes.io/agent=true`. Change these settings for your own deployment, or comment them out.
 
 ## 🔍 Health Check
 
