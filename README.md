@@ -47,10 +47,10 @@ https://artifacthub.io/packages/helm/rubxkube/joplin
 
 ```
 joplin-k8s-arm/
-├── joplin-ingressroute.yaml
 ├── joplin-manifest/
 │   ├── joplin.yaml
 │   └── postgres.yaml
+├── joplin-ingressroute.yaml
 ├── joplin-values.yaml
 ├── LICENSE
 └── README.md
